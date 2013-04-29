@@ -20,10 +20,11 @@ def ssh(data):
     return urllib2.urlopen(url=url).read()
 
 def message_handle(conn, mess):
+    white_user = ["freetgm@gmail.com", "yjw1028@gmail.com", "blueswxs@gmail.com"]
     #print mess
     user = mess.getFrom()
     print "resource:", user.getResource()
-    if not user.getResource() or not mess.getBody():
+    if not user.getResource() or not mess.getBody() or user.getStripped() not in white_user:
         return 0
     name = user.getNode()
     text = str(mess.getBody())
