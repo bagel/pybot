@@ -4,6 +4,10 @@
 import sys
 import os
 import HTMLParser
+import urllib2
+import json
+import time
+import re
 
 
 class Htmlparser(HTMLParser.HTMLParser):
@@ -55,4 +59,34 @@ class Weather:
         parser = Htmlparser(th=th, td=td)
         parser.feed(text)
         return '\n'.join([ "%s:  %s" % (h, td[th.index(h)]) for h in th ])
-    
+
+    def forecast(self):
+        data = json.loads(urllib2.urlopen(url='http://platform.sina.com.cn/weather/forecast?app_key=2872801998&city=%E5%8C%97%E4%BA%AC&lenday=2', timeout=5).read())['data']['city'][0]
+        city = data['info']['name']
+        wday = {
+            0: u"\u661f\u671f\u4e00", 
+            1: u"\u661f\u671f\u4e8c", 
+            2: u"\u661f\u671f\u4e09", 
+            3: u"\u661f\u671f\u56db", 
+            4: u"\u661f\u671f\u4e94", 
+            5: u"\u661f\u671f\u4e6d", 
+            6: u"\u661f\u671f\u65e5"
+        }
+        w = []
+        for day in data['days']['day']:
+            t = []
+            print day
+            if day['s1'] == day['s2']:
+            #if False:
+                t.append(day['s1'])
+            else:
+                t.append("%s%s%s" % (day['s1'], unicode('转', 'utf-8'), day['s2']))
+            t.append("%s ~%s " % (day['t1'], day['t2']))
+            t.append("%s %s" % (day['d1'], day['p1']))
+            w.append(t)
+        return city + " " + time.strftime("%Y-%m-%d") + " " + wday[time.localtime().tm_wday] +  unicode("\n今日 ", "utf-8") + ' '.join(w[0]) + unicode("\n明日 ", "utf-8") + ' '.join(w[1]) + "\n"
+
+
+if __name__ == "__main__":
+    print Weather().aqi()
+    print Weather().forecast()
