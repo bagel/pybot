@@ -4,7 +4,9 @@ pybot
 python gtalk bot
 
 ##Getting Started
-* **send message api** - configure wsgi with apache, add to apache httpd-vhost.conf
+* **send message api**
+
+configure wsgi with apache, add to apache httpd-vhost.conf
 
         WSGIScriptAlias /pybot /pathtopybot/application
 
