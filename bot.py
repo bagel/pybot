@@ -41,6 +41,8 @@ def message_handle(conn, mess):
         p = subprocess.Popen('python26 bot.py', shell=True)
         p.wait()
         sys.exit(0)
+    elif re.match('weather', text):
+        msg = '\n'.join(wth())
     else:
         p = subprocess.Popen(text, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         p.wait()
@@ -74,10 +76,12 @@ def bot():
         t = time.localtime()
         #if t.tm_min % 30 == 0 and t.tm_sec == 0:
         #    restart()
-        if t.tm_min == 18 and t.tm_sec == 0:
-            [ talk.Gtalk().send(conn, user, weather.Weather().aqi()) for user in white_user ]
-        if t.tm_min == 38 and t.tm_sec == 0:
-            [ talk.Gtalk().send(conn, user, weather.Weather().forecast()) for user in white_user ]
+        if t.tm_hour % 6 == 0 and t.tm_min == 18 and t.tm_sec == 0:
+            w = '\n'.join(wth())
+            [ talk.Gtalk().send(conn, user, w) for user in white_user ]
+
+def wth():
+    return (weather.Weather().forecast().encode('utf-8'), weather.Weather().aqi())
 
 def daemon():
     pid = os.fork()

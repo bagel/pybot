@@ -58,7 +58,7 @@ class Weather:
         td = []
         parser = Htmlparser(th=th, td=td)
         parser.feed(text)
-        return '\n'.join([ "%s:  %s" % (h, td[th.index(h)]) for h in th ])
+        return '\n'.join([ "%s:  %s" % (h, td[th.index(h)]) for h in th ]) + '\n'
 
     def forecast(self):
         data = json.loads(urllib2.urlopen(url='http://platform.sina.com.cn/weather/forecast?app_key=2872801998&city=%E5%8C%97%E4%BA%AC&lenday=2', timeout=5).read())['data']['city'][0]

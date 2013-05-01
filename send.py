@@ -7,7 +7,7 @@ import talk
 
 def Send(environ):
     ctype = 'text/plain; charset=utf-8'
-    data = json.loads(environ['wsgi.input'].read())
+    data = json.loads(environ['wsgi.input'].read(int(environ['CONTENT_LENGTH'])))
     msg = str(data['msg'])
     conn = talk.Gtalk().connect()
     conn.sendInitPresence()
