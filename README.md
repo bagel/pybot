@@ -22,4 +22,6 @@ configure wsgi with apache, add to apache httpd-vhost.conf
 * **bot**
 
 run
+
         python bot.py
+
