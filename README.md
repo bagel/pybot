@@ -18,3 +18,8 @@ configure wsgi with apache, add to apache httpd-vhost.conf
 
         WSGIScriptAlias /pybot /pathtopybot/application
 
+
+* **bot**
+
+run
+        python bot.py
