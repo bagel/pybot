@@ -32,7 +32,8 @@ class Htmlparser(HTMLParser.HTMLParser):
 
     def handle_data(self, data):
         if self.t == 1:
-            self.th.append(data)  #监测项
+            if data != '排名' and data != '城市':  #rank
+                self.th.append(data)  #监测项
             self.t = 0
         if self.br == 1:
             self.th[-1] = self.th[-1] + " " + data
@@ -45,13 +46,19 @@ class Htmlparser(HTMLParser.HTMLParser):
         if data == '海淀区万柳':  #监测点
             self.td.append(data)
             self.pos = 1
+        if data == '北京':  #rank
+            self.pos = 1
         if re.search('数据更新时间', data):
             self.th.append(data.split('：')[0])
             self.td.append(data.split('：')[1])
 
 class Weather:
     def aqi(self):
-        text = ''.join([ line.strip() for line in urllib2.urlopen(url='http://www.pm25.in/beijing', timeout=5).readlines() if re.search('<th.*>|<td.*>|<p>', line) ])
+        req = urllib2.Request(url='http://www.pm25.in/rank')
+        #req = urllib2.Request(url='http://10.69.6.86')
+        req.add_header('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64; rv:20.0) Gecko/20100101 Firefox/20.0')
+        #print req.headers
+        text = ''.join([ line.strip() for line in urllib2.urlopen(req, timeout=5).readlines() if re.search('</?th.*>|</?td.*>|<p>', line) ])
         #print text
         #text = "<html><body><td>text</td></body></html>"
         th = []
@@ -69,13 +76,13 @@ class Weather:
             2: u"\u661f\u671f\u4e09", 
             3: u"\u661f\u671f\u56db", 
             4: u"\u661f\u671f\u4e94", 
-            5: u"\u661f\u671f\u4e6d", 
+            5: u"\u661f\u671f\u516d", 
             6: u"\u661f\u671f\u65e5"
         }
         w = []
         for day in data['days']['day']:
             t = []
-            print day
+            #print day
             if day['s1'] == day['s2']:
             #if False:
                 t.append(day['s1'])
