@@ -76,12 +76,19 @@ def bot():
         t = time.localtime()
         #if t.tm_min % 30 == 0 and t.tm_sec == 0:
         #    restart()
-        if t.tm_hour % 6 == 0 and t.tm_min == 18 and t.tm_sec == 0:
+        if t.tm_hour % 3 == 0 and t.tm_min == 18 and t.tm_sec == 0:
             w = '\n'.join(wth())
             [ talk.Gtalk().send(conn, user, w) for user in white_user ]
 
 def wth():
-    return (weather.Weather().forecast().encode('utf-8'), weather.Weather().aqi())
+    w = aqi = ''
+    try:
+        w = weather.Weather().forecast().encode('utf-8')
+        aqi = weather.Weather().aqi()
+    except:
+        pass
+    return (w, aqi)
+    
 
 def daemon():
     pid = os.fork()
