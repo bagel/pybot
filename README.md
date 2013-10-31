@@ -39,4 +39,16 @@ examples
 
         weather
 
-4. default run commands on vm where bot run
+4. show users
+
+	user
+
+5. add user
+
+	add xxxxxx@gmail.com
+
+6. del user
+
+	del xxxxxx@gmail.com
+
+7. default messages send to all users
