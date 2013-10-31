@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding: utf-8
 
 import sys
 import os
@@ -8,7 +9,7 @@ import talk
 def Send(environ):
     ctype = 'text/plain; charset=utf-8'
     data = json.loads(environ['wsgi.input'].read(int(environ['CONTENT_LENGTH'])))
-    msg = str(data['msg'])
+    msg = data['msg']
     conn = talk.Gtalk().connect()
     conn.sendInitPresence()
     [ talk.Gtalk().send(conn, str(t), msg) for t in data['to'] ]
