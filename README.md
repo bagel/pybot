@@ -41,14 +41,14 @@ examples
 
 4. show users
 
-	user
+        user
 
 5. add user
 
-	add xxxxxx@gmail.com
+        add xxxxxx@gmail.com
 
 6. del user
 
-	del xxxxxx@gmail.com
+        del xxxxxx@gmail.com
 
 7. default messages send to all users
