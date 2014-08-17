@@ -7,7 +7,7 @@ import xmpp
 
 
 class Gtalk:
-    def __init__(self, account='sinadpool@gmail.com', password='sixxxx:
+    def __init__(self, account='xxxxxx@gmail.com', password='xxxxxx':
         self.account = account
         self.password = password
         self.host = 'talk.google.com'
