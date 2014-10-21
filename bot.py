@@ -23,7 +23,7 @@ white_user = json.load(open("user.json"))
 
 
 def ssh(data):
-    url = 'http://dpadmin.grid.sina.com.cn/cgi-bin/ssh.py?' + urllib.urlencode(data)
+    url = 'http://www.example.com/cgi-bin/ssh.py?' + urllib.urlencode(data)
     return urllib2.urlopen(url=url).read()
 
 def message_handle(conn, mess):
