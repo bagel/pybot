@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 import sys
 import os
 import talk
@@ -17,8 +18,6 @@ import weather
 
 
 
-#white_user = ["freetgm@gmail.com", "yjw1028@gmail.com", "blueswxs@gmail.com"]
-#white_user = ["freetgm@gmail.com", "caoyu1099@gmail.com"]
 white_user = json.load(open("user.json"))
 
 
