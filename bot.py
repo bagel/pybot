@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-
 import sys
 import os
 import talk
@@ -15,7 +14,6 @@ import json
 import subprocess
 import HTMLParser
 import weather
-
 
 
 white_user = json.load(open("user.json"))
